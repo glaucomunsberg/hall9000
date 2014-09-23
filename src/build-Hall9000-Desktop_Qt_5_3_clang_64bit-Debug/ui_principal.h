@@ -169,15 +169,6 @@ public:
         label_8->setStyleSheet(QLatin1String("background-color: rgb(99,104,175);\n"
 "font: 64pt \"DIN Light\";"));
         label_8->setAlignment(Qt::AlignCenter);
-        label_0->raise();
-        label_1->raise();
-        label_2->raise();
-        label_3->raise();
-        label_4->raise();
-        label_5->raise();
-        label_6->raise();
-        label_7->raise();
-        label_8->raise();
         Title = new QLabel(centralWidget);
         Title->setObjectName(QStringLiteral("Title"));
         Title->setGeometry(QRect(20, 20, 541, 111));
@@ -185,7 +176,7 @@ public:
         Title->setAlignment(Qt::AlignCenter);
         text_log = new QTextEdit(centralWidget);
         text_log->setObjectName(QStringLiteral("text_log"));
-        text_log->setGeometry(QRect(310, 230, 271, 171));
+        text_log->setGeometry(QRect(310, 220, 271, 181));
         Principal->setCentralWidget(centralWidget);
         tableView->raise();
         comboBox->raise();
@@ -211,7 +202,6 @@ public:
         Principal->setWindowTitle(QApplication::translate("Principal", "Principal", 0));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()
-         << QApplication::translate("Principal", "Escolha", 0)
          << QApplication::translate("Principal", "Largura", 0)
          << QApplication::translate("Principal", "Profundidade", 0)
         );

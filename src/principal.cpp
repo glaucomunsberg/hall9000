@@ -33,17 +33,9 @@ void Principal::start() {
     goal.at(2).push_back(7);
     goal.at(2).push_back(8);
     this->setLog("Inversoes:"+QString("%1").arg(inversoes(start)));
-    this->setLog(ui->comboBox->currentText());
-    this->setLog("Largura");
+    this->setLog(QString("%1").arg(ui->comboBox->currentIndex()) );
+
     largura(start, goal);
-
-//    if(){
-        //this->setLog("Profundidade");
-        //profundidade(start, goal);
- //   } else {
-//       }
-
-   // this->setLog(QString("Processando..."));
 
     qApp->processEvents();
 }
@@ -51,7 +43,7 @@ void Principal::start() {
 void Principal::setLog(const QString string){
     ui->setupUi(this);
     this->log.append("\n"+string);
-    ui->text_log->appendPlainText(log);
+    ui->text_log->setText(log);
     ui->text_log->show();
     QApplication::processEvents();
 }
@@ -159,8 +151,6 @@ int Principal::largura(vector<vector<int> > start, vector < vector<int> > goal){
     while(open.empty() == false){
         X = open.front();
         open.erase(open.begin());
-        int k = 0;
-        int l = 0;
 
         if(matriz_cmp(X.first, goal)){
             this->setLog(QString("Busca em largura."));
@@ -172,8 +162,8 @@ int Principal::largura(vector<vector<int> > start, vector < vector<int> > goal){
                 printMatriz(X.first);
                 cont++;
             }
-             this->setLog(QString("Numero de Estados Necessarios:"+ cont ));
-             this->setLog(QString("Numero Total de Estados Visitados:"+ id_pai+1 ));
+             this->setLog(QString("Numero de Estados: "+ QString("%1").arg(cont) ) );
+             this->setLog(QString("Numero Total de Estados Visitados: "+QString("%1").arg( id_pai+1) ) );
             return 0;
         }
         else{
@@ -183,8 +173,8 @@ int Principal::largura(vector<vector<int> > start, vector < vector<int> > goal){
             id_pai++;
             flag = 0;
 
-            int i = 0;
-            int j = 0;
+            unsigned long i = 0;
+            unsigned long j = 0;
             for( i = 0; i < children.size(); i++){
                 for(j=0;j<open.size(); j++){
                     if(matriz_cmp(children.at(i), open.at(j).first)){
@@ -231,8 +221,6 @@ int Principal::profundidade(vector<vector<int> > start, vector<vector<int> > goa
     while(open.empty() == false){
         X = open.front();
         open.erase(open.begin());
-        int k = 0;
-        int l = 0;
 
         if(matriz_cmp(X.first, goal)){
             cout << "Busca em Profundidade:" << endl;
@@ -259,8 +247,8 @@ int Principal::profundidade(vector<vector<int> > start, vector<vector<int> > goa
             id_pai++;
             flag = 0;
 
-            int i = 0;
-            int j = 0;
+            unsigned long i = 0;
+            unsigned long j = 0;
             for( i = children.size() - 1; i >= 0; i--){
                 for(j=0;j<open.size(); j++){
                     if(matriz_cmp(children.at(i), open.at(j).first)){
@@ -290,8 +278,8 @@ int Principal::profundidade(vector<vector<int> > start, vector<vector<int> > goa
 }
 
 int Principal::matriz_cmp(vector < vector <int> > first, vector< vector <int> > second){
-    for(int i = 0; i < first.size(); i++){
-        for(int j = 0; j < first.at(i).size(); j++){
+    for(unsigned long i = 0; i < first.size(); i++){
+        for(unsigned long j = 0; j < first.at(i).size(); j++){
             if(first.at(i).at(j) != second.at(i).at(j)){
                 return 0;
             }
@@ -316,10 +304,10 @@ int Principal::printMatriz(vector < vector < int > > matriz){
 int Principal::inversoes(vector<vector<int> > state){
   int cont = 0;
 
-  for(int i = 0; i < state.size(); i++){
-    for(int j = 0; j < state.at(i).size(); j++){
-      for(int k = i; k < state.size(); k++){
-        for(int l = 0; l < state.at(i).size(); l++){
+  for(unsigned long i = 0; i < state.size(); i++){
+    for(unsigned long j = 0; j < state.at(i).size(); j++){
+      for(unsigned long k = i; k < state.size(); k++){
+        for(unsigned long l = 0; l < state.at(i).size(); l++){
           if((state[i][j] > state[k][l]) && (state[k][l] != 0)){
             if(k == i && l < j){
               continue;
@@ -337,8 +325,8 @@ vector<vector<vector <int> > > Principal::generateChildren(vector<vector<int> > 
     vector<vector<vector <int> > > childrens;
     childrens.clear();
 
-    for(int i = 0; i < state.size(); i++){
-        for(int j = 0; j < state.at(i).size(); j++){
+    for(unsigned long i = 0; i < state.size(); i++){
+        for(unsigned long j = 0; j < state.at(i).size(); j++){
             if(state.at(i).at(j) == 0){
 
                 if(j > 0){

@@ -145,7 +145,6 @@ DIST          = /Users/Qt/5.3/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/Qt/5.3/clang_64/mkspecs/features/qt_config.prf \
 		/Users/Qt/5.3/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/Qt/5.3/clang_64/mkspecs/features/spec_post.prf \
-		../.qmake.stash \
 		/Users/Qt/5.3/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/Qt/5.3/clang_64/mkspecs/features/default_pre.prf \
 		/Users/Qt/5.3/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -306,7 +305,6 @@ Makefile: ../Hall9000.pro ../../../../Qt/5.3/clang_64/mkspecs/features/spec_pre.
 		../../../../Qt/5.3/clang_64/mkspecs/features/qt_config.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		../../../../Qt/5.3/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/default_pre.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -427,7 +425,6 @@ Makefile: ../Hall9000.pro ../../../../Qt/5.3/clang_64/mkspecs/features/spec_pre.
 ../../../../Qt/5.3/clang_64/mkspecs/features/qt_config.prf:
 ../../../../Qt/5.3/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../../../Qt/5.3/clang_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 ../../../../Qt/5.3/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../../../Qt/5.3/clang_64/mkspecs/features/default_pre.prf:
 ../../../../Qt/5.3/clang_64/mkspecs/features/mac/default_pre.prf:
@@ -500,6 +497,8 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_principal.cpp
 moc_principal.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMainWindow \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmainwindow.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTime \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qdatetime.h \
 		../principal.h
 	/Users/glaucomunsberg/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/glaucomunsberg/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/glaucomunsberg/Projetos/hall9000/src -I/Users/glaucomunsberg/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/glaucomunsberg/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/glaucomunsberg/Qt/5.3/clang_64/lib/QtCore.framework/Headers -I. -F/Users/glaucomunsberg/Qt/5.3/clang_64/lib ../principal.h -o moc_principal.cpp
 
@@ -526,6 +525,8 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 main.o: ../main.cpp ../principal.h \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMainWindow \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmainwindow.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTime \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qdatetime.h \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QApplication \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../main.cpp
@@ -533,6 +534,8 @@ main.o: ../main.cpp ../principal.h \
 principal.o: ../principal.cpp ../principal.h \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMainWindow \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmainwindow.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTime \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qdatetime.h \
 		ui_principal.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o principal.o ../principal.cpp
 

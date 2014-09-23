@@ -59,11 +59,6 @@
     </property>
     <item>
      <property name="text">
-      <string>Escolha</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
       <string>Largura</string>
      </property>
     </item>
@@ -396,13 +391,13 @@ font: 64pt &quot;DIN Light&quot;;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="text_log">
+   <widget class="QTextEdit" name="text_log">
     <property name="geometry">
      <rect>
-      <x>303</x>
-      <y>227</y>
+      <x>310</x>
+      <y>220</y>
       <width>271</width>
-      <height>161</height>
+      <height>181</height>
      </rect>
     </property>
    </widget>
