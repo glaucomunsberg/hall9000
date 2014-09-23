@@ -31,6 +31,7 @@ public:
     int inversoes(vector<vector<int> > state);
     vector<vector<vector <int> > > generateChildren (vector<vector<int> > state);
     void setLog(const QString string);
+    void comboChanged();
     void setNewDisplayPosition(int posicao0, int posicao1,int posicao2,int posicao3,int posicao4,int posicao5,int posicao6,int posicao7,int posicao8);
     void delay(int secounds);
     ~Principal();

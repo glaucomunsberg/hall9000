@@ -1,16 +1,18 @@
 #include "principal.h"
 #include "ui_principal.h"
+#include <QLabel>
 
 Principal::Principal(QWidget *parent) :QMainWindow(parent),ui(new Ui::Principal) {
     ui->setupUi(this);
-    log = QString("8-Puzzle");
+    log = QString("Iniciando...");
     connect(ui->start, SIGNAL(clicked()), this, SLOT(start()));
 }
 
 void Principal::start() {
-
     vector<vector<int> > start(3);
     vector <vector<int> > goal(3);
+
+    ui->text_log->setText("");
 
     start.at(0).push_back(3);
     start.at(0).push_back(1);
@@ -32,17 +34,17 @@ void Principal::start() {
     goal.at(2).push_back(6);
     goal.at(2).push_back(7);
     goal.at(2).push_back(8);
-    this->setLog("Inversoes:"+QString("%1").arg(inversoes(start)));
-    this->setLog(QString("%1").arg(ui->comboBox->currentIndex()) );
+    this->setLog("Inversões: "+QString("%1").arg(inversoes(start)));
+    this->setLog("Algortimo: "+ui->combo_box->currentText());
 
-    //largura(start, goal);
-    profundidade(start, goal);
+    largura(start, goal);
+    //profundidade(start, goal);
 
     qApp->processEvents();
 }
 
 void Principal::setLog(const QString string){
-    ui->setupUi(this);
+    //ui->setupUi(this);
     this->log.append("\n"+string);
     ui->text_log->setText(log);
     ui->text_log->show();

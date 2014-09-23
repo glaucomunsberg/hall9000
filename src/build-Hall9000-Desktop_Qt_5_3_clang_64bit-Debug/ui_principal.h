@@ -31,7 +31,6 @@ class Ui_Principal
 public:
     QWidget *centralWidget;
     QTableView *tableView;
-    QComboBox *comboBox;
     QPushButton *start;
     QLabel *label_log_nome;
     QWidget *widget;
@@ -46,6 +45,9 @@ public:
     QLabel *label_8;
     QLabel *Title;
     QTextEdit *text_log;
+    QComboBox *combo_box;
+    QLabel *label_algoritmo;
+    QPushButton *random;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -68,19 +70,14 @@ public:
         tableView->setSizePolicy(sizePolicy);
         tableView->setAutoFillBackground(true);
         tableView->setStyleSheet(QStringLiteral("backgroud-color:rgb(234,234,234);"));
-        comboBox = new QComboBox(centralWidget);
-        comboBox->setObjectName(QStringLiteral("comboBox"));
-        comboBox->setGeometry(QRect(300, 150, 171, 26));
-        comboBox->setAutoFillBackground(false);
-        comboBox->setStyleSheet(QStringLiteral("font: 14pt \"DIN Light\";"));
         start = new QPushButton(centralWidget);
         start->setObjectName(QStringLiteral("start"));
         start->setEnabled(true);
-        start->setGeometry(QRect(480, 150, 91, 32));
+        start->setGeometry(QRect(430, 190, 141, 32));
         start->setStyleSheet(QStringLiteral("font: 14pt \"DIN Light\";"));
         label_log_nome = new QLabel(centralWidget);
         label_log_nome->setObjectName(QStringLiteral("label_log_nome"));
-        label_log_nome->setGeometry(QRect(300, 190, 111, 31));
+        label_log_nome->setGeometry(QRect(300, 220, 111, 31));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -101,7 +98,7 @@ public:
         label_0->setGeometry(QRect(10, 10, 81, 81));
         label_0->setFocusPolicy(Qt::StrongFocus);
         label_0->setAutoFillBackground(false);
-        label_0->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
+        label_0->setStyleSheet(QLatin1String("background-color: rgb(99, 104, 174);\n"
 "font: 64pt \"DIN Light\";"));
         label_0->setAlignment(Qt::AlignCenter);
         label_1 = new QLabel(widget);
@@ -166,7 +163,7 @@ public:
         label_8->setCursor(QCursor(Qt::PointingHandCursor));
         label_8->setFocusPolicy(Qt::StrongFocus);
         label_8->setAutoFillBackground(false);
-        label_8->setStyleSheet(QLatin1String("background-color: rgb(99,104,175);\n"
+        label_8->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 255);\n"
 "font: 64pt \"DIN Light\";"));
         label_8->setAlignment(Qt::AlignCenter);
         Title = new QLabel(centralWidget);
@@ -176,15 +173,32 @@ public:
         Title->setAlignment(Qt::AlignCenter);
         text_log = new QTextEdit(centralWidget);
         text_log->setObjectName(QStringLiteral("text_log"));
-        text_log->setGeometry(QRect(310, 220, 271, 181));
+        text_log->setGeometry(QRect(310, 260, 271, 131));
+        combo_box = new QComboBox(centralWidget);
+        combo_box->setObjectName(QStringLiteral("combo_box"));
+        combo_box->setGeometry(QRect(310, 160, 261, 26));
+        combo_box->setStyleSheet(QStringLiteral("font: 14pt \"DIN Light\";"));
+        label_algoritmo = new QLabel(centralWidget);
+        label_algoritmo->setObjectName(QStringLiteral("label_algoritmo"));
+        label_algoritmo->setGeometry(QRect(300, 130, 111, 31));
+        sizePolicy1.setHeightForWidth(label_algoritmo->sizePolicy().hasHeightForWidth());
+        label_algoritmo->setSizePolicy(sizePolicy1);
+        label_algoritmo->setStyleSheet(QStringLiteral("font: 14pt \"DIN Light\";"));
+        random = new QPushButton(centralWidget);
+        random->setObjectName(QStringLiteral("random"));
+        random->setEnabled(true);
+        random->setGeometry(QRect(310, 190, 101, 32));
+        random->setStyleSheet(QStringLiteral("font: 14pt \"DIN Light\";"));
         Principal->setCentralWidget(centralWidget);
         tableView->raise();
-        comboBox->raise();
         start->raise();
         label_log_nome->raise();
         Title->raise();
         widget->raise();
         text_log->raise();
+        combo_box->raise();
+        label_algoritmo->raise();
+        random->raise();
         mainToolBar = new QToolBar(Principal);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         Principal->addToolBar(Qt::TopToolBarArea, mainToolBar);
@@ -200,23 +214,25 @@ public:
     void retranslateUi(QMainWindow *Principal)
     {
         Principal->setWindowTitle(QApplication::translate("Principal", "Principal", 0));
-        comboBox->clear();
-        comboBox->insertItems(0, QStringList()
-         << QApplication::translate("Principal", "Largura", 0)
-         << QApplication::translate("Principal", "Profundidade", 0)
-        );
         start->setText(QApplication::translate("Principal", "Iniciar", 0));
         label_log_nome->setText(QApplication::translate("Principal", "Logs", 0));
-        label_0->setText(QApplication::translate("Principal", "1", 0));
-        label_1->setText(QApplication::translate("Principal", "2", 0));
-        label_2->setText(QApplication::translate("Principal", "3", 0));
-        label_3->setText(QApplication::translate("Principal", "4", 0));
-        label_4->setText(QApplication::translate("Principal", "5", 0));
-        label_5->setText(QApplication::translate("Principal", "6", 0));
-        label_6->setText(QApplication::translate("Principal", "7", 0));
-        label_7->setText(QApplication::translate("Principal", "8", 0));
-        label_8->setText(QString());
+        label_0->setText(QString());
+        label_1->setText(QApplication::translate("Principal", "1", 0));
+        label_2->setText(QApplication::translate("Principal", "2", 0));
+        label_3->setText(QApplication::translate("Principal", "3", 0));
+        label_4->setText(QApplication::translate("Principal", "4", 0));
+        label_5->setText(QApplication::translate("Principal", "5", 0));
+        label_6->setText(QApplication::translate("Principal", "6", 0));
+        label_7->setText(QApplication::translate("Principal", "7", 0));
+        label_8->setText(QApplication::translate("Principal", "8", 0));
         Title->setText(QApplication::translate("Principal", "8-Puzzle", 0));
+        combo_box->clear();
+        combo_box->insertItems(0, QStringList()
+         << QApplication::translate("Principal", "Largura", 0)
+         << QApplication::translate("Principal", "Comprimento", 0)
+        );
+        label_algoritmo->setText(QApplication::translate("Principal", "Algoritmo", 0));
+        random->setText(QApplication::translate("Principal", "Embaralhar", 0));
     } // retranslateUi
 
 };
