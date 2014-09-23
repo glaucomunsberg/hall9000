@@ -229,7 +229,7 @@ public:
         combo_box->clear();
         combo_box->insertItems(0, QStringList()
          << QApplication::translate("Principal", "Largura", 0)
-         << QApplication::translate("Principal", "Comprimento", 0)
+         << QApplication::translate("Principal", "Profundidade", 0)
         );
         label_algoritmo->setText(QApplication::translate("Principal", "Algoritmo", 0));
         random->setText(QApplication::translate("Principal", "Embaralhar", 0));

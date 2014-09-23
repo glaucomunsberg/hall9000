@@ -164,7 +164,7 @@ int Principal::largura(vector<vector<int> > start, vector < vector<int> > goal){
 
         if(matriz_cmp(X.first, goal)){
             this->setLog(QString("Busca em largura."));
-            this->setLog(QString("Movimentos: "));
+            this->setLog(QString("Executando Movimentos..."));
             temp.push_back(X.first);
             while(X.second >= 0){
                 X.first = closed.at(X.second).first;
