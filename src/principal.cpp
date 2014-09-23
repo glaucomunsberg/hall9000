@@ -13,6 +13,8 @@ void Principal::start() {
     vector <vector<int> > goal(3);
 
     ui->text_log->setText("");
+// sequencias
+//    3, 1, 2, 4 , 5, 8 , 6, 0, 7
 
     start.at(0).push_back(3);
     start.at(0).push_back(1);
@@ -20,8 +22,8 @@ void Principal::start() {
     start.at(1).push_back(4);
     start.at(1).push_back(5);
     start.at(1).push_back(8);
-    start.at(2).push_back(0);
     start.at(2).push_back(6);
+    start.at(2).push_back(0);
     start.at(2).push_back(7);
 
 
@@ -34,11 +36,17 @@ void Principal::start() {
     goal.at(2).push_back(6);
     goal.at(2).push_back(7);
     goal.at(2).push_back(8);
+
     this->setLog("Inversões: "+QString("%1").arg(inversoes(start)));
     this->setLog("Algortimo: "+ui->combo_box->currentText());
+    QString a = ui->combo_box->currentText();
+    QString b = "Largura";
 
-    largura(start, goal);
-    //profundidade(start, goal);
+    if(a == b){
+        largura(start, goal);
+    } else {
+        profundidade(start, goal);
+    }
 
     qApp->processEvents();
 }
@@ -206,9 +214,9 @@ int Principal::profundidade(vector<vector<int> > start, vector<vector<int> > goa
 
     vector<pair < vector <vector<int> > , int > > open;
     vector<pair < vector <vector<int> > , int > > closed;
-    vector<vector<vector <int> > > temp;
-    vector<vector<vector <int> > > children;
     pair < vector <vector<int> > , int >  X;
+    vector<vector<vector <int> > > children;
+    vector<vector<vector <int> > > temp;
     int id_pai = -1;
     int flag;
     int cont = 0;
@@ -232,20 +240,19 @@ int Principal::profundidade(vector<vector<int> > start, vector<vector<int> > goa
             for(int a = temp.size()-1; a >= 0; a--){
                printMatriz(temp.at(a));
             }
-
             this->setLog(QString("Numero de Estados: "+ QString("%1").arg(cont) ) );
             this->setLog(QString("Numero Total de Estados Visitados: "+QString("%1").arg( id_pai+1) ) );
+
             return 0;
-        }
-        else{
+        } else {
             children = generateChildren(X.first);
             closed.push_back(X);
-            printMatriz(X.first);
+            //printMatriz(X.first);
             id_pai++;
             flag = 0;
 
-            unsigned long i = 0;
-            unsigned long j = 0;
+            int i = 0;
+            int j = 0;
             for( i = children.size() - 1; i >= 0; i--){
                 for(j=0;j<open.size(); j++){
                     if(matriz_cmp(children.at(i), open.at(j).first)){
@@ -258,19 +265,15 @@ int Principal::profundidade(vector<vector<int> > start, vector<vector<int> > goa
                         flag = 1;
                     }
                 }
-
-
                 if(flag == 0){
 
                     open.insert(open.begin(), make_pair(children.at(i), id_pai));
                 }
-
                 flag = 0;
             }
         }
-
     }
-    cout << "fail" << endl;
+    this->setLog(QString("Fail"));
     return 1;
 }
 
@@ -293,7 +296,7 @@ int Principal::printMatriz(vector < vector < int > > matriz){
         }
     }
     setNewDisplayPosition(temp.at(8),temp.at(7),temp.at(6),temp.at(5),temp.at(4),temp.at(3),temp.at(2),temp.at(1),temp.at(0));
-    this->delay(100);
+    this->delay(1000);
     return 1;
 }
 

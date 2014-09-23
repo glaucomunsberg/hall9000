@@ -394,7 +394,7 @@ font: 64pt &quot;DIN Light&quot;;</string>
     </item>
     <item>
      <property name="text">
-      <string>Comprimento</string>
+      <string>Profundidade</string>
      </property>
     </item>
    </widget>
