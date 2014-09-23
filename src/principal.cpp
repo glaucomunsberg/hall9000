@@ -35,7 +35,8 @@ void Principal::start() {
     this->setLog("Inversoes:"+QString("%1").arg(inversoes(start)));
     this->setLog(QString("%1").arg(ui->comboBox->currentIndex()) );
 
-    largura(start, goal);
+    //largura(start, goal);
+    profundidade(start, goal);
 
     qApp->processEvents();
 }
@@ -136,16 +137,15 @@ int Principal::largura(vector<vector<int> > start, vector < vector<int> > goal){
 
     vector<pair < vector <vector<int> > , int > > open;
     vector<pair < vector <vector<int> > , int > > closed;
-
+    vector<vector<vector <int> > > children;
+    vector<vector<vector <int> > > temp;
     pair < vector <vector<int> > , int >  X;
 
-    vector<vector<vector <int> > > children;
     int id_pai = -1;
     int flag;
     int cont = 0;
 
     closed.clear();
-
     open.push_back(make_pair(start, id_pai));
 
     while(open.empty() == false){
@@ -155,21 +155,22 @@ int Principal::largura(vector<vector<int> > start, vector < vector<int> > goal){
         if(matriz_cmp(X.first, goal)){
             this->setLog(QString("Busca em largura."));
             this->setLog(QString("Movimentos: "));
-            printMatriz(X.first);
-             while(X.second >= 0){
+            temp.push_back(X.first);
+            while(X.second >= 0){
                 X.first = closed.at(X.second).first;
                 X.second = closed.at(X.second).second;
-                printMatriz(X.first);
+                temp.push_back(X.first);
                 cont++;
             }
+             for(int a = temp.size()-1; a >= 0; a--){
+                printMatriz(temp.at(a));
+             }
              this->setLog(QString("Numero de Estados: "+ QString("%1").arg(cont) ) );
              this->setLog(QString("Numero Total de Estados Visitados: "+QString("%1").arg( id_pai+1) ) );
-            return 0;
-        }
-        else{
+            return 1;
+        } else {
             children = generateChildren(X.first);
             closed.push_back(X);
-            //printMatriz(X.first);
             id_pai++;
             flag = 0;
 
@@ -187,13 +188,9 @@ int Principal::largura(vector<vector<int> > start, vector < vector<int> > goal){
                         flag = 1;
                     }
                 }
-
-
                 if(flag == 0){
-                //	printMatriz(children.at(i));
                     open.push_back(make_pair(children.at(i), id_pai));
                 }
-
                 flag = 0;
             }
         }
@@ -207,15 +204,13 @@ int Principal::profundidade(vector<vector<int> > start, vector<vector<int> > goa
 
     vector<pair < vector <vector<int> > , int > > open;
     vector<pair < vector <vector<int> > , int > > closed;
-
-    pair < vector <vector<int> > , int >  X;
-
+    vector<vector<vector <int> > > temp;
     vector<vector<vector <int> > > children;
+    pair < vector <vector<int> > , int >  X;
     int id_pai = -1;
     int flag;
     int cont = 0;
     closed.clear();
-
     open.push_back(make_pair(start, id_pai));
 
     while(open.empty() == false){
@@ -223,21 +218,21 @@ int Principal::profundidade(vector<vector<int> > start, vector<vector<int> > goa
         open.erase(open.begin());
 
         if(matriz_cmp(X.first, goal)){
-            cout << "Busca em Profundidade:" << endl;
-            cout << "Movimentos: " << endl;
-            printMatriz(X.first);
-            //printMatriz(X.first);
+            this->setLog(QString("Busca em profundidade."));
+            this->setLog(QString("Movimentos: "));
+            temp.push_back(X.first);
             while(X.second >= 0){
                 X.first = closed.at(X.second).first;
                 X.second = closed.at(X.second).second;
-                printMatriz(X.first);
+                temp.push_back(X.first);
                 cont++;
-
+            }
+            for(int a = temp.size()-1; a >= 0; a--){
+               printMatriz(temp.at(a));
             }
 
-            cout << "Numero de Estados Necessarios: " << cont <<endl;
-            cout << "Numero Total de Estados Visitados: " << id_pai+1 <<endl;
-            cout << endl;
+            this->setLog(QString("Numero de Estados: "+ QString("%1").arg(cont) ) );
+            this->setLog(QString("Numero Total de Estados Visitados: "+QString("%1").arg( id_pai+1) ) );
             return 0;
         }
         else{
@@ -293,13 +288,13 @@ int Principal::printMatriz(vector < vector < int > > matriz){
     for(int i = matriz.size()-1; i >= 0; i--){
         for(int j = matriz.size()-1; j >= 0; j--){
             temp.push_back(matriz.at(i).at(j));
-            //setLog(QString("%1").arg(matriz.at(i).at(j)));
         }
     }
     setNewDisplayPosition(temp.at(8),temp.at(7),temp.at(6),temp.at(5),temp.at(4),temp.at(3),temp.at(2),temp.at(1),temp.at(0));
-    this->delay(1000);
+    this->delay(100);
     return 1;
 }
+
 
 int Principal::inversoes(vector<vector<int> > state){
   int cont = 0;
