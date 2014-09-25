@@ -38,6 +38,7 @@ public:
 
 private slots:
     void start();
+    void random();
 private:
     Ui::Principal *ui;
 };

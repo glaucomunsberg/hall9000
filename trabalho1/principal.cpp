@@ -1,11 +1,13 @@
 #include "principal.h"
 #include "ui_principal.h"
 #include <QLabel>
+#include <stdlib.h>
 
 Principal::Principal(QWidget *parent) :QMainWindow(parent),ui(new Ui::Principal) {
     ui->setupUi(this);
-    log = QString("Iniciando...");
+    log = QString("Início");
     connect(ui->start, SIGNAL(clicked()), this, SLOT(start()));
+    connect(ui->random, SIGNAL(clicked()), this, SLOT(random()));
 }
 
 void Principal::start() {
@@ -13,8 +15,6 @@ void Principal::start() {
     vector <vector<int> > goal(3);
 
     ui->text_log->setText("");
-// sequencias
-//    3, 1, 2, 4 , 5, 8 , 6, 0, 7
 
     start.at(0).push_back(3);
     start.at(0).push_back(1);
@@ -25,7 +25,6 @@ void Principal::start() {
     start.at(2).push_back(6);
     start.at(2).push_back(0);
     start.at(2).push_back(7);
-
 
     goal.at(0).push_back(0);
     goal.at(0).push_back(1);
@@ -52,7 +51,7 @@ void Principal::start() {
 }
 
 void Principal::setLog(const QString string){
-    //ui->setupUi(this);
+
     this->log.append("\n"+string);
     ui->text_log->setText(log);
     ui->text_log->show();
@@ -163,7 +162,7 @@ int Principal::largura(vector<vector<int> > start, vector < vector<int> > goal){
         open.erase(open.begin());
 
         if(matriz_cmp(X.first, goal)){
-            this->setLog(QString("Busca em largura."));
+            this->setLog(QString("Algoritmo: Busca em largura."));
             this->setLog(QString("Executando Movimentos..."));
             temp.push_back(X.first);
             while(X.second >= 0){
@@ -228,8 +227,8 @@ int Principal::profundidade(vector<vector<int> > start, vector<vector<int> > goa
         open.erase(open.begin());
 
         if(matriz_cmp(X.first, goal)){
-            this->setLog(QString("Busca em profundidade."));
-            this->setLog(QString("Movimentos: "));
+            this->setLog(QString("Algoritmo: Busca em profundidade."));
+            this->setLog(QString("Executando Movimentos..."));
             temp.push_back(X.first);
             while(X.second >= 0){
                 X.first = closed.at(X.second).first;
@@ -300,6 +299,93 @@ int Principal::printMatriz(vector < vector < int > > matriz){
     return 1;
 }
 
+void Principal::random(){
+
+    this->setLog(QString("Embaralhando..."));
+    vector <vector<int> > valores(9);
+
+    valores.at(0).push_back(4);
+    valores.at(0).push_back(1);
+    valores.at(0).push_back(2);
+    valores.at(0).push_back(5);
+    valores.at(0).push_back(7);
+    valores.at(0).push_back(0);
+    valores.at(0).push_back(6);
+    valores.at(0).push_back(8);
+    valores.at(0).push_back(3);
+
+    valores.at(1).push_back(5);
+    valores.at(1).push_back(1);
+    valores.at(1).push_back(4);
+    valores.at(1).push_back(0);
+    valores.at(1).push_back(6);
+    valores.at(1).push_back(2);
+    valores.at(1).push_back(7);
+    valores.at(1).push_back(8);
+    valores.at(1).push_back(3);
+
+    valores.at(2).push_back(8);
+    valores.at(2).push_back(2);
+    valores.at(2).push_back(4);
+    valores.at(2).push_back(6);
+    valores.at(2).push_back(7);
+    valores.at(2).push_back(3);
+    valores.at(2).push_back(5);
+    valores.at(2).push_back(0);
+    valores.at(2).push_back(1);
+
+
+    valores.at(3).push_back(2);
+    valores.at(3).push_back(4);
+    valores.at(3).push_back(5);
+    valores.at(3).push_back(7);
+    valores.at(3).push_back(3);
+    valores.at(3).push_back(0);
+    valores.at(3).push_back(6);
+    valores.at(3).push_back(1);
+    valores.at(3).push_back(8);
+
+    valores.at(4).push_back(0);
+    valores.at(4).push_back(1);
+    valores.at(4).push_back(5);
+    valores.at(4).push_back(3);
+    valores.at(4).push_back(8);
+    valores.at(4).push_back(2);
+    valores.at(4).push_back(4);
+    valores.at(4).push_back(7);
+    valores.at(4).push_back(6);
+
+    valores.at(5).push_back(6);
+    valores.at(5).push_back(7);
+    valores.at(5).push_back(4);
+    valores.at(5).push_back(3);
+    valores.at(5).push_back(0);
+    valores.at(5).push_back(2);
+    valores.at(5).push_back(5);
+    valores.at(5).push_back(1);
+    valores.at(5).push_back(8);
+
+    valores.at(6).push_back(5);
+    valores.at(6).push_back(1);
+    valores.at(6).push_back(0);
+    valores.at(6).push_back(7);
+    valores.at(6).push_back(8);
+    valores.at(6).push_back(2);
+    valores.at(6).push_back(4);
+    valores.at(6).push_back(3);
+    valores.at(6).push_back(6);
+
+    int posicao;
+    int vezes = 8;
+    while(vezes != 0){
+        vezes--;
+        posicao = rand() % 7;
+        this->setNewDisplayPosition(valores[posicao][0],valores[posicao][1],valores[posicao][2],valores[posicao][3],valores[posicao][4],valores[posicao][5],valores[posicao][6],valores[posicao][7],valores[posicao][8]);
+        this->delay(150);
+    }
+
+    this->setNewDisplayPosition(3,1,2,4,5,8,6,0,7);
+}
 
 int Principal::inversoes(vector<vector<int> > state){
   int cont = 0;
